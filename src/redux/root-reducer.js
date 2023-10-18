@@ -10,6 +10,8 @@ const rootReducer = combineReducers({
     filter: filterReducer,
 })
 
+
+
 const persistConfig = {
     key: 'root',
     storage,
@@ -18,3 +20,4 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export default persistedReducer; 
+
