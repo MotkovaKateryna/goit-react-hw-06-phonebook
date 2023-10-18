@@ -17,7 +17,6 @@ const handleChange = ({target}) => {
 
     )
 }
-
 const handleSubmit = e => {
   e.preventDefault();
   onSubmit({name,number});

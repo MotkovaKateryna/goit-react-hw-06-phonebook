@@ -1,6 +1,5 @@
 import { useSelector,useDispatch } from 'react-redux';
 
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import ContactsForm from './ContactsForm/ContactsForm';
@@ -37,15 +36,11 @@ const  onAddContact = ({ name, number }) => {
     Notify.warning(` ${name} is already in contacts`);
     return false;
   }
-  // const action = addContact({name,number});
-  // dispatch(action);
   dispatch(addContact({name,number}));
   return true;
 };
 
 const onRemoveContact = (id) => {
-  // const action = deleteContact(id);
-  // dispatch(action);
   dispatch(deleteContact(id));
 };
 
