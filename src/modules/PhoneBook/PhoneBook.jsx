@@ -6,18 +6,16 @@ import ContactsForm from './ContactsForm/ContactsForm';
 import ContactList from './ContactList/ContactList';
 import ContactsFilter from './ContactsFilter/ContactsFilter';
 
-import {addContact, deleteContact} from "../../redux/contacts/contacts-slice";
-import { setFilter } from 'redux/filter/filter-slice';
+import {addContact} from "../../redux/contacts/contacts-slice";
+
 
 import { getAllContacts, getFilteredContacts } from 'redux/contacts/contacts-selectors';
-import {getFilter} from "redux/filter/filter-selectors";
 
 import styles from './phone-book.module.scss';
 
 
 const PhoneBook = () => {
   const contacts = useSelector(getAllContacts);
-  const filter = useSelector(getFilter);
   const filteredContacts = useSelector(getFilteredContacts);
 
 const dispatch = useDispatch();
@@ -39,16 +37,7 @@ const  onAddContact = ({ name, number }) => {
   dispatch(addContact({name,number}));
   return true;
 };
-
-const onRemoveContact = (id) => {
-  dispatch(deleteContact(id));
-};
-
-const  handleFilter = ({ target }) => {
-  dispatch(setFilter(target.value))
-};
-
-    const isContacts = Boolean(filteredContacts.length);
+   const isContacts = Boolean(filteredContacts.length);
 
     return (
       <div>
@@ -59,9 +48,9 @@ const  handleFilter = ({ target }) => {
           </div>
           <div className={styles.block}>
             <h2 className={styles.title}>Contacts</h2>
-            <ContactsFilter value={filter} handleChange={handleFilter} />
+            <ContactsFilter/>
             {isContacts && (
-              <ContactList removeContact={onRemoveContact} items={filteredContacts} />
+              <ContactList />
             )}
             {!isContacts && <p className={styles.notif}>No contacts in list</p>}
           </div>

@@ -22,6 +22,8 @@ const handleSubmit = e => {
   onSubmit({name,number});
   setState({...inititalState});
 }
+
+
 const {name,number} = state;
 return (
   <form onSubmit={handleSubmit} className={styles.formGroup}>
