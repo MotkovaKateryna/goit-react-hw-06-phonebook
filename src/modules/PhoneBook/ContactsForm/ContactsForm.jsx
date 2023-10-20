@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useDispatch,useSelector } from 'react-redux';
+import { addContact } from 'redux/contacts/contacts-slice';
+import { getAllContacts } from 'redux/contacts/contacts-selectors';
 import inititalState from './inititalState';
+
 
 import styles from './contacts-form.module.scss';
 
-const ContactsForm = ({onSubmit}) =>{
 
- 
-const [state, setState] =useState({...inititalState});
+const ContactsForm = () =>{
+
+ const [state, setState] = useState({...inititalState});
+ const contacts = useSelector(getAllContacts);
+ const dispatch =useDispatch();
 
 const handleChange = ({target}) => {
     const {name,value} = target;
@@ -17,11 +23,24 @@ const handleChange = ({target}) => {
 
     )
 }
-const handleSubmit = e => {
-  e.preventDefault();
-  onSubmit({name,number});
-  setState({...inititalState});
+const isDublicate = (name) => {
+  const normalizedName = name.toLowerCase();
+  const contact = contacts.find(({ name }) => {
+    return name.toLowerCase() === normalizedName;
+  });
+  return Boolean(contact);
 }
+
+const  handleSubmit = (e) => {
+  e.preventDefault();
+  if (isDublicate(name)) {
+    Notify.warning(` ${name} is already in contacts`);
+    return false;
+  }
+  dispatch(addContact({name,number}));
+  setState({...inititalState});
+  return true;
+  };
 
 
 const {name,number} = state;
@@ -64,6 +83,3 @@ return (
 
 export default ContactsForm;
 
-ContactsForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
