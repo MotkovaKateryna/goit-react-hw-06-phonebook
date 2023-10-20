@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { memo } from 'react';
 
 import styles from './contact-list.module.scss';
-import { getAllContacts } from 'redux/contacts/contacts-selectors';
+import {getFilteredContacts } from 'redux/contacts/contacts-selectors';
 import {deleteContact} from "redux/contacts/contacts-slice";
 
 const ContactList = () => {
   const dispatch = useDispatch();
   
 
-  const contacts = useSelector(getAllContacts).map(({ id, name, number }) => (
+  const contacts = useSelector(getFilteredContacts).map(({ id, name, number }) => (
     <li className={styles.item} key={id}>
       {name}: {number}{' '}
       <button
@@ -23,5 +24,5 @@ const ContactList = () => {
   return <ol className={styles.list}>{contacts}</ol>;
 };
 
-export default ContactList;
+export default memo(ContactList);
 
