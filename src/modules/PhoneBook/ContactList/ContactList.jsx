@@ -7,7 +7,6 @@ import {deleteContact} from "redux/contacts/contacts-slice";
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  
 
   const contacts = useSelector(getFilteredContacts).map(({ id, name, number }) => (
     <li className={styles.item} key={id}>

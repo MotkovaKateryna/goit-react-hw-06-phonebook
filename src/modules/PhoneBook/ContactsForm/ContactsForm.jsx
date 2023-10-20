@@ -35,6 +35,7 @@ const  handleSubmit = (e) => {
   e.preventDefault();
   if (isDublicate(name)) {
     Notify.warning(` ${name} is already in contacts`);
+    setState({...inititalState});
     return false;
   }
   dispatch(addContact({name,number}));

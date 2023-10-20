@@ -4,12 +4,9 @@ import ContactsForm from './ContactsForm/ContactsForm';
 import ContactList from './ContactList/ContactList';
 import ContactsFilter from './ContactsFilter/ContactsFilter';
 
-
-
 import {getFilteredContacts } from 'redux/contacts/contacts-selectors';
 
 import styles from './phone-book.module.scss';
-
 
 const PhoneBook = () => {
    const filteredContacts = useSelector(getFilteredContacts);
