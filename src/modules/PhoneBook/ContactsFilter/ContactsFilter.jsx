@@ -1,5 +1,3 @@
-
-
 import styles from './contacts-filter.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilter } from 'redux/filter/filter-selectors';
@@ -29,4 +27,3 @@ const ContactsFilter = () => {
 };
 
 export default ContactsFilter;
-
